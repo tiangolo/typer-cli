@@ -121,10 +121,10 @@ $ typer my_custom_script.py run bye --name Camila
 Bye Camila
 ```
 
-* Instead of using `python` directly you type `typer`.
-* After the name of the file you add the subcommand `run`.
+* Instead of using `python` directly you use the `typer` command.
+* After the name of the file, add the subcommand `run`.
 
-✔️ If you installed completion for **Typer CLI** (for the `typer` command) as described above, when you hit <kbd>TAB</kbd> you will have completion for everything, including the `run` and all the subcommands and options of your script, like `hello`, `bye`, and `--name`. 🚀
+✔️ If you installed completion for **Typer CLI** (for the `typer` command) as described above, when you hit <kbd>TAB</kbd> you will have completion for everything, including all the subcommands and options of your script, like `hello`, `bye`, and `--name`. 🚀
 
 ## If main
 
@@ -139,9 +139,9 @@ You can also remove it if you are calling that script only with **Typer CLI** (u
 
 ## What can it run
 
-**Typer CLI** will run any script made with **Typer**.
+**Typer CLI** can run any script with **Typer**, but the script doesn't even have to use **Typer** at all.
 
-It could even run a file with a function that could be used with `typer.run()`, even if it doesn't really use **Typer**.
+**Typer CLI** could even run a file with a function that could be used with `typer.run()`, even if the script doesn't use `typer.run()` or anything else.
 
 For example, a file `main.py` like this will still work:
 
@@ -178,9 +178,9 @@ You can specify the following **CLI Options**:
 
 When your run a script with the **Typer CLI** (the `typer` command) it will use the app from the following priority:
 
-* App object from `--app` *CLI Option*.
-* Function to convert to a **Typer** app from `--func` *CLI Option*.
-* **Typer** app in a variable with a name of `app`, `cli`, or `main`.
+* An app object from the `--app` *CLI Option*.
+* A function to convert to a **Typer** app from `--func` *CLI Option* (like when using `typer.run()`).
+* A **Typer** app in a variable with a name of `app`, `cli`, or `main`.
 * The first **Typer** app available in the file, with any name.
 * A function in a variable with a name of `main`, `cli`, or `app`.
 * The first function in the file, with any name.
