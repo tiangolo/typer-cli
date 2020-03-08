@@ -3,7 +3,8 @@ name = "typer-cli"
 version = "0.0.2"
 description = ""
 authors = ["Sebastián Ramírez <tiangolo@gmail.com>"]
-readme = 'README.md'
+readme = "README.md"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.6"
