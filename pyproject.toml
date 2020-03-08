@@ -9,7 +9,28 @@ homepage = "https://github.com/tiangolo/typer"
 repository = "https://github.com/tiangolo/typer"
 documentation = "https://typer.tiangolo.com"
 classifiers = [
-    
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License"
 ]
 
 [tool.poetry.dependencies]
