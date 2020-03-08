@@ -70,7 +70,7 @@ def get_choices(cli: Command, prog_name: str, args: List[str], incomplete: str):
 def print_version(ctx: typer.Context, param: Option, value: bool):
     if not value or ctx.resilient_parsing:
         return
-    typer.echo(f"Version: {__version__}")
+    typer.echo(f"Typer CLI version: {__version__}")
     raise typer.Exit()
 
 
