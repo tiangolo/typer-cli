@@ -23,9 +23,9 @@
 
 **Typer** is a library for building CLIs (Command Line Interface applications).
 
-**Typer CLI** (this package) is a CLI application that simplifies running simple programs created with **Typer**.
+**Typer CLI** (this package) is a CLI application that simplifies running simple programs created with **Typer** with completion. 🚀
 
-**Typer CLI**'s main feature is to provide completion in the Terminal for your own small programs built with **Typer**, without you having to create a complete installable Python package with them.
+**Typer CLI**'s main feature is to provide ✨ completion ✨ in the Terminal for your own small programs built with **Typer**, without you having to create a complete installable Python package with them.
 
 It's probably most useful if you have a small custom Python script using **Typer** (maybe as part of some project), for some small tasks, and it's not complex/important enough to create a whole installable Python package for it (something to be installed with `pip`).
 
@@ -124,7 +124,7 @@ Bye Camila
 * Instead of using `python` directly you type `typer`.
 * After the name of the file you add the subcommand `run`.
 
-✔️ If you installed completion as described above, when you hit <kbd>TAB</kbd> you will have autocompletion for everything, including the `run` and all the subcommands and options of your script, like `hello`, `bye`, and `--name`.
+✔️ If you installed completion for **Typer CLI** (for the `typer` command) as described above, when you hit <kbd>TAB</kbd> you will have completion for everything, including the `run` and all the subcommands and options of your script, like `hello`, `bye`, and `--name`. 🚀
 
 ## If main
 
@@ -136,6 +136,54 @@ if __name__ == "__main__":
 ```
 
 You can also remove it if you are calling that script only with **Typer CLI** (using the `typer` command).
+
+## What can it run
+
+**Typer CLI** will run any script made with **Typer**.
+
+It could even run a file with a function that could be used with `typer.run()`, even if it doesn't really use **Typer**.
+
+For example, a file `main.py` like this will still work:
+
+```Python
+def main(name: str = "World"):
+    print(f"Hello {name}")
+```
+
+Then you can call it with:
+
+```console
+$ typer main.py run --help
+Usage: typer run [OPTIONS]
+
+Options:
+  --name TEXT
+  --help       Show this message and exit.
+
+$ typer main.py run --name Camila
+
+Hello Camila
+```
+
+And it will also have completion for things like the `--name` **CLI Option**.
+
+## Options
+
+You can specify the following **CLI Options**:
+
+* `--app`: the name of the variable with a `Typer()` object to run as the main app.
+* `--func`: the name of the variable with a function that would be used with `typer.run()`.
+
+### Defaults
+
+When your run a script with the **Typer CLI** (the `typer` command) it will use the app from the following priority:
+
+* App object from `--app` *CLI Option*.
+* Function to convert to a **Typer** app from `--func` *CLI Option*.
+* **Typer** app in a variable with a name of `app`, `cli`, or `main`.
+* The first **Typer** app available in the file, with any name.
+* A function in a variable with a name of `main`, `cli`, or `app`.
+* The first function in the file, with any name.
 
 ## License
 
