@@ -136,3 +136,7 @@ if __name__ == "__main__":
 ```
 
 You can also remove it if you are calling that script only with **Typer CLI** (using the `typer` command).
+
+## License
+
+This project is licensed under the terms of the MIT license.
