@@ -29,7 +29,7 @@ before_deploy:
 
 deploy:
     provider: script
-    script: bash scripts/deploy.sh
+    script: bash scripts/publish.sh
     on:
         tags: true
         python: "3.6"
