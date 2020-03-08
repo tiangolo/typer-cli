@@ -24,6 +24,9 @@ script:
 after_script:
     - bash <(curl -s https://codecov.io/bash)
 
+before_deploy:
+    - poetry config pypi-token.pypi $PYPI_TOKEN
+
 deploy:
     provider: script
     script: bash scripts/deploy.sh
