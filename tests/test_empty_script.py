@@ -8,15 +8,11 @@ def test_script_help():
             "run",
             "-m",
             "typer_cli",
-            "tests/assets/sample.py",
-            "run",
+            "tests/assets/empty_script.py",
             "--help",
         ],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         encoding="utf-8",
     )
-    assert "bye" in result.stdout
-    assert "Say bye" in result.stdout
-    assert "hello" in result.stdout
-    assert "Say hi" in result.stdout
+    assert "run" not in result.stdout

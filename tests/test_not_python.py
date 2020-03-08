@@ -3,7 +3,7 @@ import subprocess
 
 def test_not_python():
     result = subprocess.run(
-        ["coverage", "run", "-m", "typer_cli", "tests/not_python.txt", "run"],
+        ["coverage", "run", "-m", "typer_cli", "tests/assets/not_python.txt", "run"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         encoding="utf-8",
