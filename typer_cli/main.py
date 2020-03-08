@@ -13,7 +13,28 @@ from click_completion.core import get_choices as original_get_choices  # type: i
 
 from . import __version__
 
+default_app_names = ("app", "cli", "main")
+default_func_names = ("main", "cli", "app")
+
 app = typer.Typer()
+
+
+class State:
+    def __init__(self) -> None:
+        self.app = None
+        self.func = None
+
+
+state = State()
+
+
+def maybe_update_state(ctx: click.Context) -> None:
+    app_name = ctx.params.get("app")
+    if app_name:
+        state.app = app_name
+    func_name = ctx.params.get("func")
+    if func_name:
+        state.func = func_name
 
 
 class TyperCLIGroup(click.Group):
@@ -32,6 +53,7 @@ class TyperCLIGroup(click.Group):
     def maybe_add_run(self, ctx: click.Context) -> None:
         file = ctx.params.get("file")
         if file:
+            maybe_update_state(ctx)
             sub_cli = generate_cli_from_path(ctx=ctx, file=file)
             if sub_cli:
                 self.add_command(sub_cli, "run")
@@ -46,13 +68,61 @@ def generate_cli_from_path(*, ctx: click.Context, file: str) -> Optional[Command
         sys.exit(1)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)  # type: ignore
-    for local_name in dir(mod):
-        if local_name.startswith("__"):
-            continue
-        obj: typer.Typer = getattr(mod, local_name)
+    # Try to get defined app
+    if state.app:
+        obj: typer.Typer = getattr(mod, state.app, None)
+        if not isinstance(obj, typer.Typer):
+            typer.echo(f"Not a Typer object: --app {state.app}", err=True)
+            sys.exit(1)
+        obj._add_completion = False
+        click_obj = typer.main.get_command(obj)
+        return click_obj
+    # Try to get defined function
+    if state.func:
+        func_obj = getattr(mod, state.func, None)
+        if not callable(func_obj):
+            typer.echo(f"Not a function: --func {state.func}", err=True)
+            sys.exit(1)
+        sub_app = typer.Typer()
+        sub_app.command()(func_obj)
+        sub_app._add_completion = False
+        click_obj = typer.main.get_command(sub_app)
+        return click_obj
+    # Iterate and get a default object to use as CLI
+    local_names = dir(mod)
+    local_names_set = set(local_names)
+    # Try to get a default Typer app
+    for name in default_app_names:
+        if name in local_names_set:
+            obj = getattr(mod, name, None)
+            if isinstance(obj, typer.Typer):
+                obj._add_completion = False
+                click_obj = typer.main.get_command(obj)
+                return click_obj
+    # Try to get any Typer app
+    for name in local_names_set - set(default_app_names):
+        obj = getattr(mod, name)
         if isinstance(obj, typer.Typer):
             obj._add_completion = False
             click_obj = typer.main.get_command(obj)
+            return click_obj
+    # Try to get a default function
+    for func_name in default_func_names:
+        func_obj = getattr(mod, func_name, None)
+        if callable(func_obj):
+            sub_app = typer.Typer()
+            sub_app.command()(func_obj)
+            sub_app._add_completion = False
+            click_obj = typer.main.get_command(sub_app)
+            return click_obj
+    # Try to get any func app
+    for func_name in local_names_set - set(default_func_names):
+        func_obj = getattr(mod, func_name)
+        if callable(func_obj):
+            sub_app = typer.Typer()
+            sub_app.command()(func_obj)
+            sub_app._add_completion = False
+            click_obj = typer.main.get_command(sub_app)
             return click_obj
     return None
 
@@ -66,6 +136,7 @@ def get_choices(
         cli = cast(Group, cli)
         file = ctx.params.get("file")
         if file:
+            maybe_update_state(ctx)
             sub_cli = generate_cli_from_path(ctx=ctx, file=file)
             if sub_cli:
                 cli.add_command(sub_cli, "run")
