@@ -31,5 +31,6 @@ deploy:
     provider: script
     script: bash scripts/publish.sh
     on:
-        tags: true
+        # tags: true
+        branch: master
         python: "3.6"
