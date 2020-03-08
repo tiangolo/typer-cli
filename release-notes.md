@@ -1,5 +1,7 @@
 ## Latest changes
 
+## 0.0.4
+
 * Handle default Typer to extract and run in this priority:
     * App object from `--app` *CLI Option*.
     * Function to convert to a **Typer** app from `--func` *CLI Option*.
