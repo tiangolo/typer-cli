@@ -13,8 +13,13 @@ click-completion = "^0.5.2"
 colorama = "^0.4.3"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
+pytest = "^4.4.0"
 black = {version = "^19.10b0", allow-prereleases = true}
+pytest-cov = "^2.8.1"
+pytest-xdist = "^1.31.0"
+pytest-sugar = "^0.9.2"
+mypy = "^0.761"
+flake8 = "^3.7.9"
 
 [tool.poetry.scripts]
 typer = "typer_cli.main:main"
