@@ -1,6 +1,21 @@
 # Typer CLI
 
-Run **Typer** scripts with completion, without having to create a package, using **Typer CLI**.
+<p align="center">
+    <em>Run <strong>Typer</strong> scripts with completion, without having to create a package, using <strong>Typer CLI</strong>.</em>
+</p>
+<p align="center">
+<a href="https://travis-ci.com/tiangolo/typer-cli" target="_blank">
+    <img src="https://travis-ci.com/tiangolo/typer-cli.svg?branch=master" alt="Build Status">
+</a>
+<a href="https://codecov.io/gh/tiangolo/typer-cli" target="_blank">
+    <img src="https://codecov.io/gh/tiangolo/typer-cli/branch/master/graph/badge.svg" alt="Coverage">
+</a>
+<a href="https://pypi.org/project/typer-cli" target="_blank">
+    <img src="https://badge.fury.io/py/typer-cli.svg" alt="Package version">
+</a>
+</p>
+
+---
 
 ⚠️ **WARNING** ⚠️ If you are building a CLI package you probably need [**Typer**](https://typer.tiangolo.com/), the library itself. This, **Typer CLI**, is a CLI application that simplifies running simple **Typer** scripts, it is not the library itself.
 
