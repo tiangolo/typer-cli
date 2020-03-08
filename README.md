@@ -1,6 +1,6 @@
 # Typer CLI
 
-Easily run your **Typer** scripts with autocompletion, without having to create a package, using **Typer CLI**.
+Run **Typer** scripts with completion, without having to create a package, using **Typer CLI**.
 
 ⚠️ **WARNING** ⚠️ If you are building a CLI package you probably need [**Typer**](https://typer.tiangolo.com/), the library itself. This, **Typer CLI**, is a CLI application that simplifies running simple **Typer** scripts, it is not the library itself.
 

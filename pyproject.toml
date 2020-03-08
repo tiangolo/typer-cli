@@ -1,15 +1,21 @@
 [tool.poetry]
 name = "typer-cli"
 version = "0.0.2"
-description = ""
+description = "Run Typer scripts with completion, without having to create a package, using Typer CLI."
 authors = ["Sebastián Ramírez <tiangolo@gmail.com>"]
 readme = "README.md"
 license = "MIT"
+homepage = "https://github.com/tiangolo/typer"
+repository = "https://github.com/tiangolo/typer"
+documentation = "https://typer.tiangolo.com"
+classifiers = [
+    
+]
 
 [tool.poetry.dependencies]
 python = "^3.6"
 importlib_metadata = "^1.5"
-typer = "^0.0.8"
+typer = "^0.0.9"
 click-completion = "^0.5.2"
 colorama = "^0.4.3"
 
