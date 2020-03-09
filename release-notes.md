@@ -1,5 +1,7 @@
 ## Latest changes
 
+## 0.0.5
+
 * Add support for [generating Markdown docs](https://github.com/tiangolo/typer-cli#generate-docs) for **Typer** apps. PR [#3](https://github.com/tiangolo/typer-cli/pull/3).
 
 ## 0.0.4
