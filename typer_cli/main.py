@@ -1,4 +1,5 @@
 import importlib.util
+import re
 import sys
 from pathlib import Path
 from typing import Any, Iterable, List, Optional, Tuple, cast
@@ -17,18 +18,34 @@ default_app_names = ("app", "cli", "main")
 default_func_names = ("main", "cli", "app")
 
 app = typer.Typer()
+utils_app = typer.Typer(help="Extra utility commands for Typer applications.")
+app.add_typer(utils_app, name="utils")
 
 
 class State:
     def __init__(self) -> None:
-        self.app = None
-        self.func = None
+        self.app: Optional[str] = None
+        self.func: Optional[str] = None
+        self.file: Optional[Path] = None
+        self.module: Optional[str] = None
 
 
 state = State()
 
 
 def maybe_update_state(ctx: click.Context) -> None:
+    path_or_module = ctx.params.get("path_or_module")
+    if path_or_module:
+        file_path = Path(path_or_module)
+        if file_path.exists() and file_path.is_file():
+            state.file = file_path
+        else:
+            if not re.fullmatch(r"[a-zA-Z_]\w*(\.[a-zA-Z_]\w*)*", path_or_module):
+                typer.echo(
+                    f"Not a valid file or Python module: {path_or_module}", err=True
+                )
+                sys.exit(1)
+            state.module = path_or_module
     app_name = ctx.params.get("app")
     if app_name:
         state.app = app_name
@@ -51,80 +68,82 @@ class TyperCLIGroup(click.Group):
         return super().invoke(ctx)
 
     def maybe_add_run(self, ctx: click.Context) -> None:
-        file = ctx.params.get("file")
-        if file:
-            maybe_update_state(ctx)
-            sub_cli = generate_cli_from_path(ctx=ctx, file=file)
-            if sub_cli:
-                self.add_command(sub_cli, "run")
+        maybe_update_state(ctx)
+        if state.file or state.module:
+            obj = get_typer_from_state()
+            if obj:
+                obj._add_completion = False
+                click_obj = typer.main.get_command(obj)
+                if not click_obj.help:
+                    click_obj.help = "Run the provided Typer application."
+                self.add_command(click_obj, "run")
 
 
-def generate_cli_from_path(*, ctx: click.Context, file: str) -> Optional[Command]:
-    file_path = Path(file)
-    module_name = file_path.name
-    spec = importlib.util.spec_from_file_location(module_name, str(file_path))
-    if spec is None:
-        typer.echo(f"Could not import as Python the file: {file}", err=True)
-        sys.exit(1)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)  # type: ignore
+def get_typer_from_module(module: Any) -> Optional[typer.Typer]:
     # Try to get defined app
     if state.app:
-        obj: typer.Typer = getattr(mod, state.app, None)
+        obj: typer.Typer = getattr(module, state.app, None)
         if not isinstance(obj, typer.Typer):
             typer.echo(f"Not a Typer object: --app {state.app}", err=True)
             sys.exit(1)
-        obj._add_completion = False
-        click_obj = typer.main.get_command(obj)
-        return click_obj
+        return obj
     # Try to get defined function
     if state.func:
-        func_obj = getattr(mod, state.func, None)
+        func_obj = getattr(module, state.func, None)
         if not callable(func_obj):
             typer.echo(f"Not a function: --func {state.func}", err=True)
             sys.exit(1)
         sub_app = typer.Typer()
         sub_app.command()(func_obj)
-        sub_app._add_completion = False
-        click_obj = typer.main.get_command(sub_app)
-        return click_obj
+        return sub_app
     # Iterate and get a default object to use as CLI
-    local_names = dir(mod)
+    local_names = dir(module)
     local_names_set = set(local_names)
     # Try to get a default Typer app
     for name in default_app_names:
         if name in local_names_set:
-            obj = getattr(mod, name, None)
+            obj = getattr(module, name, None)
             if isinstance(obj, typer.Typer):
-                obj._add_completion = False
-                click_obj = typer.main.get_command(obj)
-                return click_obj
+                return obj
     # Try to get any Typer app
     for name in local_names_set - set(default_app_names):
-        obj = getattr(mod, name)
+        obj = getattr(module, name)
         if isinstance(obj, typer.Typer):
-            obj._add_completion = False
-            click_obj = typer.main.get_command(obj)
-            return click_obj
+            return obj
     # Try to get a default function
     for func_name in default_func_names:
-        func_obj = getattr(mod, func_name, None)
+        func_obj = getattr(module, func_name, None)
         if callable(func_obj):
             sub_app = typer.Typer()
             sub_app.command()(func_obj)
-            sub_app._add_completion = False
-            click_obj = typer.main.get_command(sub_app)
-            return click_obj
+            return sub_app
     # Try to get any func app
     for func_name in local_names_set - set(default_func_names):
-        func_obj = getattr(mod, func_name)
+        func_obj = getattr(module, func_name)
         if callable(func_obj):
             sub_app = typer.Typer()
             sub_app.command()(func_obj)
-            sub_app._add_completion = False
-            click_obj = typer.main.get_command(sub_app)
-            return click_obj
+            return sub_app
     return None
+
+
+def get_typer_from_state() -> Optional[typer.Typer]:
+    spec = None
+    if state.file:
+        module_name = state.file.name
+        spec = importlib.util.spec_from_file_location(module_name, str(state.file))
+    elif state.module:
+        spec = importlib.util.find_spec(state.module)  # type: ignore
+    if spec is None:
+        if state.file:
+            typer.echo(f"Could not import as Python file: {state.file}", err=True)
+        else:
+            typer.echo(f"Could not import as Python module: {state.module}", err=True)
+        sys.exit(1)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)  # type: ignore
+    obj = get_typer_from_module(module)
+    return obj
 
 
 def get_choices(
@@ -134,12 +153,13 @@ def get_choices(
     if ctx.parent is None:
         assert isinstance(cli, Group)
         cli = cast(Group, cli)
-        file = ctx.params.get("file")
-        if file:
-            maybe_update_state(ctx)
-            sub_cli = generate_cli_from_path(ctx=ctx, file=file)
-            if sub_cli:
-                cli.add_command(sub_cli, "run")
+        maybe_update_state(ctx)
+        if state.file or state.module:
+            obj = get_typer_from_state()
+            if obj:
+                obj._add_completion = False
+                click_obj = typer.main.get_command(obj)
+                cli.add_command(click_obj, "run")
     return original_get_choices(cli, prog_name, args, incomplete)
 
 
@@ -154,12 +174,111 @@ def print_version(ctx: click.Context, param: Option, value: bool) -> None:
 def callback(
     ctx: typer.Context,
     *,
-    file: Path = typer.Argument(..., exists=True, file_okay=True, dir_okay=True),
-    app: str = typer.Option(None, help="The typer app object/variable to use"),
-    func: str = typer.Option(None, help="The function to convert to Typer"),
-    version: bool = typer.Option(False, "--version", callback=print_version),  # type: ignore
+    path_or_module: str = typer.Argument(None),
+    app: str = typer.Option(None, help="The typer app object/variable to use."),
+    func: str = typer.Option(None, help="The function to convert to Typer."),
+    version: bool = typer.Option(
+        False, "--version", help="Print version and exit.", callback=print_version  # type: ignore
+    ),
 ) -> None:
-    pass
+    """
+    Typer CLI.
+    
+    Run Typer scripts with completion, without having to create a package.
+
+    You probably want to install completion for the typer command:
+
+    $ typer --install-completion
+
+    https://typer.tiangolo.com/
+    """
+    maybe_update_state(ctx)
+
+
+def get_docs_for_click(
+    *,
+    obj: Command,
+    ctx: typer.Context,
+    indent: int = 0,
+    name: str = "",
+    call_prefix: str = "",
+) -> str:
+    docs = "#" * (1 + indent)
+    command_name = name or obj.name
+    title = f"`{command_name}`" if command_name else "CLI"
+    docs += f" {title}\n\n"
+    if obj.help:
+        docs += f"{obj.help}\n\n"
+    usage_pieces = obj.collect_usage_pieces(ctx)
+    if usage_pieces:
+        docs += "**Usage**:\n\n"
+        docs += "```console\n"
+        docs += "$ "
+        if call_prefix:
+            docs += f"{call_prefix} "
+        if command_name:
+            docs += f"{command_name} "
+        docs += f"{' '.join(usage_pieces)}\n"
+        docs += "```\n\n"
+    opts = []
+    for param in obj.get_params(ctx):
+        rv = param.get_help_record(ctx)
+        if rv is not None:
+            opts.append(rv)
+    if opts:
+        docs += f"**Options**:\n\n"
+        for opt_name, opt_help in opts:
+            docs += f"* `{opt_name}`"
+            if opt_help:
+                docs += f": {opt_help}"
+            docs += "\n"
+        docs += "\n"
+    if obj.epilog:
+        docs += f"{obj.epilog}\n\n"
+    if isinstance(obj, Group):
+        group: Group = cast(Group, obj)
+        commands = group.list_commands(ctx)
+        if commands:
+            docs += f"**Commands**:\n\n"
+            for command in commands:
+                command_obj = group.get_command(ctx, command)
+                assert command_obj
+                docs += f"* `{command_obj.name}`"
+                command_help = command_obj.get_short_help_str()
+                if command_help:
+                    docs += f": {command_help}"
+                docs += "\n"
+            docs += "\n"
+        for command in commands:
+            command_obj = group.get_command(ctx, command)
+            assert command_obj
+            use_prefix = ""
+            if call_prefix:
+                use_prefix += f"{call_prefix} "
+            if command_name:
+                use_prefix += f"{command_name}"
+            docs += get_docs_for_click(
+                obj=command_obj, ctx=ctx, indent=indent + 1, call_prefix=use_prefix
+            )
+    return docs
+
+
+@utils_app.command()
+def docs(
+    ctx: typer.Context,
+    name: str = typer.Option("", help="The name of the CLI program to use in docs."),
+) -> None:
+    """
+    Generate Markdown docs for a Typer application.
+    """
+    typer_obj = get_typer_from_state()
+    if not typer_obj:
+        typer.echo(f"No Typer app found", err=True)
+        raise typer.Abort()
+    click_obj = typer.main.get_command(typer_obj)
+    docs = get_docs_for_click(obj=click_obj, ctx=ctx, name=name)
+    clean_docs = docs.strip()
+    typer.echo(clean_docs)
 
 
 def main() -> Any:
