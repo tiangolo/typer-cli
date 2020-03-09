@@ -21,7 +21,7 @@ The end
 * `sub`
 * `top`: Top command
 
-## `sub`
+## `multiapp sub`
 
 **Usage**:
 
@@ -38,7 +38,7 @@ $ multiapp sub [OPTIONS] COMMAND [ARGS]...
 * `bye`: Say bye
 * `hello`: Say Hello
 
-### `bye`
+### `multiapp sub bye`
 
 Say bye
 
@@ -52,7 +52,7 @@ $ multiapp sub bye [OPTIONS]
 
 * `--help`: Show this message and exit.
 
-### `hello`
+### `multiapp sub hello`
 
 Say Hello
 
@@ -67,7 +67,7 @@ $ multiapp sub hello [OPTIONS]
 * `--name TEXT`
 * `--help`: Show this message and exit.
 
-## `top`
+## `multiapp top`
 
 Top command
 
