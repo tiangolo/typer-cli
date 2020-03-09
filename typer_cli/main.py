@@ -205,6 +205,8 @@ def get_docs_for_click(
 ) -> str:
     docs = "#" * (1 + indent)
     command_name = name or obj.name
+    if call_prefix:
+        command_name = f"{call_prefix} {command_name}"
     title = f"`{command_name}`" if command_name else "CLI"
     docs += f" {title}\n\n"
     if obj.help:
@@ -214,8 +216,6 @@ def get_docs_for_click(
         docs += "**Usage**:\n\n"
         docs += "```console\n"
         docs += "$ "
-        if call_prefix:
-            docs += f"{call_prefix} "
         if command_name:
             docs += f"{command_name} "
         docs += f"{' '.join(usage_pieces)}\n"
@@ -253,8 +253,6 @@ def get_docs_for_click(
             command_obj = group.get_command(ctx, command)
             assert command_obj
             use_prefix = ""
-            if call_prefix:
-                use_prefix += f"{call_prefix} "
             if command_name:
                 use_prefix += f"{command_name}"
             docs += get_docs_for_click(
