@@ -137,7 +137,7 @@ if __name__ == "__main__":
 
 You can also remove it if you are calling that script only with **Typer CLI** (using the `typer` command).
 
-## What can it run
+## Run other files
 
 **Typer CLI** can run any script with **Typer**, but the script doesn't even have to use **Typer** at all.
 
@@ -167,6 +167,25 @@ Hello Camila
 
 And it will also have completion for things like the `--name` **CLI Option**.
 
+## Run a package or module
+
+Instead of a file path you can pass a module (possibly in a package) to import.
+
+For example:
+
+```console
+$ typer my_package.main run --help
+Usage: typer run [OPTIONS]
+
+Options:
+  --name TEXT
+  --help       Show this message and exit.
+
+$ typer my_package.main run --name Camila
+
+Hello Camila
+```
+
 ## Options
 
 You can specify the following **CLI Options**:
@@ -184,6 +203,33 @@ When your run a script with the **Typer CLI** (the `typer` command) it will use 
 * The first **Typer** app available in the file, with any name.
 * A function in a variable with a name of `main`, `cli`, or `app`.
 * The first function in the file, with any name.
+
+## Generate docs
+
+**Typer CLI** can also generate Markdown documentation for your **Typer** application.
+
+You can use the subcommand `utils`.
+
+And then the subcommand `docs`.
+
+For example:
+
+```console
+$ typer some_script.py utils docs
+```
+
+**Options**:
+
+* `--name TEXT`: The name of the CLI program to use in docs.
+* `--output FILE`: An output file to write docs to, like README.md.
+
+For example:
+
+```console
+$ typer my_package.main utils docs --name myapp --output README.md
+
+Docs saved to: README.md
+```
 
 ## License
 
