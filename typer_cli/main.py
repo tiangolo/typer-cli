@@ -18,7 +18,7 @@ default_app_names = ("app", "cli", "main")
 default_func_names = ("main", "cli", "app")
 
 app = typer.Typer()
-utils_app = typer.Typer(help="Extra utility commands for Typer applications.")
+utils_app = typer.Typer(help="Extra utility commands for Typer apps.")
 app.add_typer(utils_app, name="utils")
 
 
@@ -75,7 +75,7 @@ class TyperCLIGroup(click.Group):
                 obj._add_completion = False
                 click_obj = typer.main.get_command(obj)
                 if not click_obj.help:
-                    click_obj.help = "Run the provided Typer application."
+                    click_obj.help = "Run the provided Typer app."
                 self.add_command(click_obj, "run")
 
 
@@ -269,7 +269,7 @@ def docs(
     name: str = typer.Option("", help="The name of the CLI program to use in docs."),
 ) -> None:
     """
-    Generate Markdown docs for a Typer application.
+    Generate Markdown docs for a Typer app.
     """
     typer_obj = get_typer_from_state()
     if not typer_obj:
