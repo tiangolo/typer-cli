@@ -183,7 +183,7 @@ def callback(
 ) -> None:
     """
     Typer CLI.
-    
+
     Run Typer scripts with completion, without having to create a package.
 
     You probably want to install completion for the typer command:
