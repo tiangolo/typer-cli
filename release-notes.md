@@ -1,5 +1,7 @@
 ## Latest changes
 
+* Add support for [generating Markdown docs](https://github.com/tiangolo/typer-cli#generate-docs) for **Typer** apps. PR [#3](https://github.com/tiangolo/typer-cli/pull/3).
+
 ## 0.0.4
 
 * Handle default Typer to extract and run in this priority:
