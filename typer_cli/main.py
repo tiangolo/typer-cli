@@ -267,6 +267,12 @@ def get_docs_for_click(
 def docs(
     ctx: typer.Context,
     name: str = typer.Option("", help="The name of the CLI program to use in docs."),
+    output: Path = typer.Option(
+        None,
+        help="An output file to write docs to, like README.md.",
+        file_okay=True,
+        dir_okay=False,
+    ),
 ) -> None:
     """
     Generate Markdown docs for a Typer app.
@@ -277,8 +283,12 @@ def docs(
         raise typer.Abort()
     click_obj = typer.main.get_command(typer_obj)
     docs = get_docs_for_click(obj=click_obj, ctx=ctx, name=name)
-    clean_docs = docs.strip()
-    typer.echo(clean_docs)
+    clean_docs = f"{docs.strip()}\n"
+    if output:
+        output.write_text(clean_docs)
+        typer.echo(f"Docs saved to: {output}")
+    else:
+        typer.echo(clean_docs)
 
 
 def main() -> Any:
