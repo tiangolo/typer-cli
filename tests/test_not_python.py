@@ -8,4 +8,4 @@ def test_not_python():
         stderr=subprocess.PIPE,
         encoding="utf-8",
     )
-    assert "Could not import as Python the file" in result.stderr
+    assert "Could not import as Python file" in result.stderr
