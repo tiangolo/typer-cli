@@ -94,7 +94,7 @@ def test_script_sub_hello():
         stderr=subprocess.PIPE,
         encoding="utf-8",
     )
-    assert "sub hello" in result.stdout
+    assert "Hello World" in result.stdout
 
 
 def test_script_sub_bye():

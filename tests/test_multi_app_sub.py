@@ -40,4 +40,4 @@ def test_script():
         stderr=subprocess.PIPE,
         encoding="utf-8",
     )
-    assert "sub hello" in result.stdout
+    assert "Hello World" in result.stdout
