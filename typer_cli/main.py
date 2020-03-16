@@ -6,11 +6,10 @@ from typing import Any, Iterable, List, Optional, Tuple, cast
 
 import click
 import click.core
-import click_completion  # type: ignore
 import typer
 from click import Command, Group, Option
-from click._bashcomplete import resolve_ctx  # type: ignore
-from click_completion.core import get_choices as original_get_choices  # type: ignore
+from click._bashcomplete import resolve_ctx
+from click._bashcomplete import get_choices as original_get_choices
 
 from . import __version__
 
@@ -69,14 +68,7 @@ class TyperCLIGroup(click.Group):
 
     def maybe_add_run(self, ctx: click.Context) -> None:
         maybe_update_state(ctx)
-        if state.file or state.module:
-            obj = get_typer_from_state()
-            if obj:
-                obj._add_completion = False
-                click_obj = typer.main.get_command(obj)
-                if not click_obj.help:
-                    click_obj.help = "Run the provided Typer app."
-                self.add_command(click_obj, "run")
+        maybe_add_run_to_cli(self)
 
 
 def get_typer_from_module(module: Any) -> Optional[typer.Typer]:
@@ -146,6 +138,19 @@ def get_typer_from_state() -> Optional[typer.Typer]:
     return obj
 
 
+def maybe_add_run_to_cli(cli: click.Group) -> None:
+    if "run" not in cli.commands:
+        if state.file or state.module:
+            obj = get_typer_from_state()
+            if obj:
+                obj._add_completion = False
+                click_obj = typer.main.get_command(obj)
+                click_obj.name = "run"
+                if not click_obj.help:
+                    click_obj.help = "Run the provided Typer app."
+                cli.add_command(click_obj)
+
+
 def get_choices(
     cli: Command, prog_name: str, args: List[str], incomplete: str
 ) -> List[Tuple[str, str]]:
@@ -154,12 +159,7 @@ def get_choices(
         assert isinstance(cli, Group)
         cli = cast(Group, cli)
         maybe_update_state(ctx)
-        if state.file or state.module:
-            obj = get_typer_from_state()
-            if obj:
-                obj._add_completion = False
-                click_obj = typer.main.get_command(obj)
-                cli.add_command(click_obj, "run")
+        maybe_add_run_to_cli(cli)
     return original_get_choices(cli, prog_name, args, incomplete)
 
 
@@ -290,6 +290,5 @@ def docs(
 
 
 def main() -> Any:
-    click_completion.core.get_choices = get_choices
-    click_completion.init()
+    click._bashcomplete.get_choices = get_choices
     return app()
