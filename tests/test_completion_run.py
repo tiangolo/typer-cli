@@ -10,7 +10,7 @@ def test_script_completion_run():
         encoding="utf-8",
         env={
             **os.environ,
-            "___MAIN__.PY_COMPLETE": "complete-bash",
+            "___MAIN__.PY_COMPLETE": "complete_bash",
             "COMP_WORDS": "typer tests/assets/sample.py",
             "COMP_CWORD": "2",
         },

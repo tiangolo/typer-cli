@@ -10,9 +10,9 @@ def test_script_completion_run():
         encoding="utf-8",
         env={
             **os.environ,
-            "___MAIN__.PY_COMPLETE": "complete-bash",
+            "___MAIN__.PY_COMPLETE": "complete_bash",
             "COMP_WORDS": "typer tests/assets/sample.py run hello --",
             "COMP_CWORD": "4",
         },
     )
-    assert "--help" in result.stdout
+    assert "--name" in result.stdout
