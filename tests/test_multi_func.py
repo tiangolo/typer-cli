@@ -10,7 +10,7 @@ def test_help():
             "typer_cli",
             "tests/assets/multi_func.py",
             "run",
-            "--help"
+            "--help",
         ],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
