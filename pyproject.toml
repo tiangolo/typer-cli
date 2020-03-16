@@ -36,9 +36,9 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.6"
 importlib_metadata = "^1.5"
-typer = "^0.0.9"
-click-completion = "^0.5.2"
+typer = "^0.0.11"
 colorama = "^0.4.3"
+shellingham = "^1.3.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.4.0"
