@@ -15,21 +15,59 @@
 </a>
 </p>
 
----
+There is an optional utility tool called **Typer CLI**, additional to **Typer** itself.
 
-⚠️ **WARNING** ⚠️ If you are building a CLI package you probably need [**Typer**](https://typer.tiangolo.com/), the library itself. This, **Typer CLI**, is a CLI application that simplifies running simple **Typer** scripts, it is not the library itself.
+It's main feature is to provide ✨ completion ✨ in the Terminal for your own small programs built with **Typer**.
 
-## Description
-
-**Typer** is a library for building CLIs (Command Line Interface applications).
-
-**Typer CLI** (this package) is a CLI application that simplifies running simple programs created with **Typer** with completion. 🚀
-
-**Typer CLI**'s main feature is to provide ✨ completion ✨ in the Terminal for your own small programs built with **Typer**, without you having to create a complete installable Python package with them.
+...without you having to create a complete installable Python package.
 
 It's probably most useful if you have a small custom Python script using **Typer** (maybe as part of some project), for some small tasks, and it's not complex/important enough to create a whole installable Python package for it (something to be installed with `pip`).
 
 In that case, you can install **Typer CLI**, and run your program with the `typer` command in your Terminal, and it will provide completion for your script.
+
+You can also use **Typer CLI** to generate Markdown documentation for your own **Typer** programs 📝.
+
+---
+
+**Documentation**: <a href="https://typer.tiangolo.com/typer-cli/" target="_blank">https://typer.tiangolo.com/typer-cli/</a>
+
+**Source Code for Typer CLI**: <a href="https://github.com/tiangolo/typer-cli" target="_blank">https://github.com/tiangolo/typer-cli</a>
+
+---
+
+## **Typer** or **Typer CLI**
+
+**Typer** is a library for building CLIs (Command Line Interface applications).
+
+You use **Typer** in your Python scripts. Like in:
+
+```Python
+import typer
+
+
+def main():
+    typer.echo("Hello World")
+
+
+if __name__ == "__main__":
+    typer.run(main)
+```
+
+**Typer CLI** is a command line application to run simple programs created with **Typer**, with completion in your terminal 🚀.
+
+You use **Typer CLI** in your terminal, to run your scripts (as an alternative to calling `python` directly). Like in:
+
+<div class="termy">
+
+```console
+$ typer my_script.py run
+
+Hello World
+```
+
+</div>
+
+But you never import anything from **Typer CLI** in your own scripts.
 
 ## Usage
 
@@ -37,17 +75,30 @@ In that case, you can install **Typer CLI**, and run your program with the `type
 
 Install **Typer CLI**:
 
+<div class="termy">
+
 ```console
 $ python -m pip install typer-cli
+---> 100%
+Successfully installed typer-cli
 ```
 
-That creates a `typer` command.
+</div>
+
+That creates a `typer` command you can call in your terminal, much like `python`, `git`, or `echo`.
 
 You can then install completion for it:
 
+<div class="termy">
+
 ```console
 $ typer --install-completion
+
+zsh completion installed in /home/user/.bashrc.
+Completion will take effect once you restart the terminal.
 ```
+
+</div>
 
 ### Sample script
 
@@ -79,9 +130,23 @@ if __name__ == "__main__":
     app()
 ```
 
+For it to work, you would also install **Typer**:
+
+<div class="termy">
+
+```console
+$ python -m pip install typer
+---> 100%
+Successfully installed typer
+```
+
+</div>
+
 ### Run with Python
 
 Then you could run your script with normal Python:
+
+<div class="termy">
 
 ```console
 $ python my_custom_script.py hello
@@ -97,7 +162,9 @@ $ python my_custom_script.py bye --name Camila
 Bye Camila
 ```
 
-There's nothing wrong with running with Python directly. And, in fact, if some other code or program uses your script, that would be the best way to do it.
+</div>
+
+There's nothing wrong with using Python directly to run it. And, in fact, if some other code or program uses your script, that would probably be the best way to do it.
 
 ⛔️ But in your terminal, you won't get completion when hitting <kbd>TAB</kbd> for any of the subcommands or options, like `hello`, `bye`, and `--name`.
 
@@ -106,6 +173,8 @@ There's nothing wrong with running with Python directly. And, in fact, if some o
 Here's where **Typer CLI** is useful.
 
 You can also run the same script with the `typer` command you get after installing `typer-cli`:
+
+<div class="termy">
 
 ```console
 $ typer my_custom_script.py run hello
@@ -121,10 +190,12 @@ $ typer my_custom_script.py run bye --name Camila
 Bye Camila
 ```
 
+</div>
+
 * Instead of using `python` directly you use the `typer` command.
 * After the name of the file, add the subcommand `run`.
 
-✔️ If you installed completion for **Typer CLI** (for the `typer` command) as described above, when you hit <kbd>TAB</kbd> you will have completion for everything, including all the subcommands and options of your script, like `hello`, `bye`, and `--name`. 🚀
+✔️ If you installed completion for **Typer CLI** (for the `typer` command) as described above, when you hit <kbd>TAB</kbd> you will have ✨ completion for everything ✨, including all the subcommands and options of your script, like `hello`, `bye`, and `--name` 🚀.
 
 ## If main
 
@@ -135,7 +206,7 @@ if __name__ == "__main__":
     app()
 ```
 
-You can also remove it if you are calling that script only with **Typer CLI** (using the `typer` command).
+...you can also remove it if you are calling that script only with **Typer CLI** (using the `typer` command).
 
 ## Run other files
 
@@ -147,14 +218,21 @@ For example, a file `main.py` like this will still work:
 
 ```Python
 def main(name: str = "World"):
+    """
+    Say hi to someone, by default to the World.
+    """
     print(f"Hello {name}")
 ```
 
 Then you can call it with:
 
+<div class="termy">
+
 ```console
 $ typer main.py run --help
 Usage: typer run [OPTIONS]
+
+  Say hi to someone, by default to the World.
 
 Options:
   --name TEXT
@@ -165,13 +243,17 @@ $ typer main.py run --name Camila
 Hello Camila
 ```
 
-And it will also have completion for things like the `--name` **CLI Option**.
+</div>
+
+And it will also have completion for things like the `--name` *CLI Option*.
 
 ## Run a package or module
 
 Instead of a file path you can pass a module (possibly in a package) to import.
 
 For example:
+
+<div class="termy">
 
 ```console
 $ typer my_package.main run --help
@@ -186,9 +268,11 @@ $ typer my_package.main run --name Camila
 Hello Camila
 ```
 
+</div>
+
 ## Options
 
-You can specify the following **CLI Options**:
+You can specify one of the following **CLI Options**:
 
 * `--app`: the name of the variable with a `Typer()` object to run as the main app.
 * `--func`: the name of the variable with a function that would be used with `typer.run()`.
@@ -208,15 +292,90 @@ When your run a script with the **Typer CLI** (the `typer` command) it will use 
 
 **Typer CLI** can also generate Markdown documentation for your **Typer** application.
 
+### Sample script with docs
+
+For example, you could have a script like:
+
+```Python
+import typer
+
+app = typer.Typer(help="Awesome CLI user manager.")
+
+
+@app.command()
+def create(username: str):
+    """
+    Create a new user with USERNAME.
+    """
+    typer.echo(f"Creating user: {username}")
+
+
+@app.command()
+def delete(
+    username: str,
+    force: bool = typer.Option(
+        ...,
+        prompt="Are you sure you want to delete the user?",
+        help="Force deletion without confirmation.",
+    ),
+):
+    """
+    Delete a user with USERNAME.
+
+    If --force is not used, will ask for confirmation.
+    """
+    if force:
+        typer.echo(f"Deleting user: {username}")
+    else:
+        typer.echo("Operation cancelled")
+
+
+@app.command()
+def delete_all(
+    force: bool = typer.Option(
+        ...,
+        prompt="Are you sure you want to delete ALL users?",
+        help="Force deletion without confirmation.",
+    )
+):
+    """
+    Delete ALL users in the database.
+
+    If --force is not used, will ask for confirmation.
+    """
+    if force:
+        typer.echo("Deleting all users")
+    else:
+        typer.echo("Operation cancelled")
+
+
+@app.command()
+def init():
+    """
+    Initialize the users database.
+    """
+    typer.echo("Initializing user database")
+
+
+if __name__ == "__main__":
+    app()
+```
+
+### Generate docs with Typer CLI
+
+Then you could generate docs for it with **Typer CLI**.
+
 You can use the subcommand `utils`.
 
 And then the subcommand `docs`.
 
-For example:
+<div class="termy">
 
 ```console
 $ typer some_script.py utils docs
 ```
+
+</div>
 
 **Options**:
 
@@ -225,12 +384,109 @@ $ typer some_script.py utils docs
 
 For example:
 
+<div class="termy">
+
 ```console
-$ typer my_package.main utils docs --name myapp --output README.md
+$ typer my_package.main utils docs --name awesome-cli --output README.md
 
 Docs saved to: README.md
 ```
 
+</div>
+
+### Sample docs output
+
+For example, for the previous script, the generated docs would look like:
+
+---
+
+## `awesome-cli`
+
+Awesome CLI user manager.
+
+**Usage**:
+
+```console
+$ awesome-cli [OPTIONS] COMMAND [ARGS]...
+```
+
+**Options**:
+
+* `--install-completion`: Install completion for the current shell.
+* `--show-completion`: Show completion for the current shell, to copy it or customize the installation.
+* `--help`: Show this message and exit.
+
+**Commands**:
+
+* `create`: Create a new user with USERNAME.
+* `delete`: Delete a user with USERNAME.
+* `delete-all`: Delete ALL users in the database.
+* `init`: Initialize the users database.
+
+## `awesome-cli create`
+
+Create a new user with USERNAME.
+
+**Usage**:
+
+```console
+$ awesome-cli create [OPTIONS] USERNAME
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `awesome-cli delete`
+
+Delete a user with USERNAME.
+
+If --force is not used, will ask for confirmation.
+
+**Usage**:
+
+```console
+$ awesome-cli delete [OPTIONS] USERNAME
+```
+
+**Options**:
+
+* `--force / --no-force`: Force deletion without confirmation.  [required]
+* `--help`: Show this message and exit.
+
+## `awesome-cli delete-all`
+
+Delete ALL users in the database.
+
+If --force is not used, will ask for confirmation.
+
+**Usage**:
+
+```console
+$ awesome-cli delete-all [OPTIONS]
+```
+
+**Options**:
+
+* `--force / --no-force`: Force deletion without confirmation.  [required]
+* `--help`: Show this message and exit.
+
+## `awesome-cli init`
+
+Initialize the users database.
+
+**Usage**:
+
+```console
+$ awesome-cli init [OPTIONS]
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+---
+
 ## License
 
-This project is licensed under the terms of the MIT license.
+**Typer CLI**, the same as **Typer**, is licensed under the terms of the MIT license.
