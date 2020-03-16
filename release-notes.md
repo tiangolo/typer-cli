@@ -1,5 +1,12 @@
 ## Latest changes
 
+* Synchronize README with docs in [Typer - Typer CLI](https://typer.tiangolo.com/typer-cli/) and update links. PR [#5](https://github.com/tiangolo/typer-cli/pull/5).
+* Upgrade **Typer** after re-implementing completion:
+    * Add support for PowerShell in modern versions (e.g. Windows 10).
+    * Fix support for user-provided completions.
+    * Fix creation of sub-command `run` in each internal case.
+    * PR [#4](https://github.com/tiangolo/typer-cli/pull/4).
+
 ## 0.0.5
 
 * Add support for [generating Markdown docs](https://github.com/tiangolo/typer-cli#generate-docs) for **Typer** apps. PR [#3](https://github.com/tiangolo/typer-cli/pull/3).
