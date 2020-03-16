@@ -1,6 +1,24 @@
 import subprocess
 
 
+def test_help():
+    result = subprocess.run(
+        [
+            "coverage",
+            "run",
+            "-m",
+            "typer_cli",
+            "tests/assets/multi_func.py",
+            "run",
+            "--help"
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        encoding="utf-8",
+    )
+    assert "Say hi to someone, by default to the World." in result.stdout
+
+
 def test_script():
     result = subprocess.run(
         [
