@@ -5,9 +5,9 @@ description = "Run Typer scripts with completion, without having to create a pac
 authors = ["Sebastián Ramírez <tiangolo@gmail.com>"]
 readme = "README.md"
 license = "MIT"
-homepage = "https://github.com/tiangolo/typer"
-repository = "https://github.com/tiangolo/typer"
-documentation = "https://typer.tiangolo.com"
+homepage = "https://github.com/tiangolo/typer-cli"
+repository = "https://github.com/tiangolo/typer-cli"
+documentation = "https://typer.tiangolo.com/typer-cli/"
 classifiers = [
     "Environment :: Console",
     "Intended Audience :: Developers",
