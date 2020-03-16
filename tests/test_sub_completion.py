@@ -13,6 +13,7 @@ def test_script_completion_run():
             "___MAIN__.PY_COMPLETE": "complete_bash",
             "COMP_WORDS": "typer tests/assets/sample.py run hello --",
             "COMP_CWORD": "4",
+            "_TYPER_COMPLETE_TESTING": "True",
         },
     )
     assert "--name" in result.stdout
