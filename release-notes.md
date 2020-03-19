@@ -1,5 +1,7 @@
 ## Latest changes
 
+## 0.0.7
+
 * Upgrade Typer to version 0.1.0. PR [#7](https://github.com/tiangolo/typer-cli/pull/7).
 
 ## 0.0.6
