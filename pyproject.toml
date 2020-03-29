@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "typer-cli"
-version = "0.0.7"
+version = "0.0.8"
 description = "Run Typer scripts with completion, without having to create a package, using Typer CLI."
 authors = ["Sebastián Ramírez <tiangolo@gmail.com>"]
 readme = "README.md"
