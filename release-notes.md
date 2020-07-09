@@ -1,5 +1,6 @@
 ## Latest changes
 
+* ⬆ Upgrade Typer version to 0.3.0. PR [#13](https://github.com/tiangolo/typer-cli/pull/13).
 * ⬆️ Update mypy requirement from ^0.761 to ^0.782. PR [#18](https://github.com/tiangolo/typer-cli/pull/18).
 * ⬆️ Update pytest requirement from ^4.4.0 to ^5.4.3. PR [#16](https://github.com/tiangolo/typer-cli/pull/16).
 * ⬆️ Update isort requirement from ^4.3.21 to ^5.0.6. PR [#15](https://github.com/tiangolo/typer-cli/pull/15).
