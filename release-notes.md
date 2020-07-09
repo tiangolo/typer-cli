@@ -1,5 +1,7 @@
 ## Latest changes
 
+* Update GitHub action issue-manager and add Dependabot. PR [#14](https://github.com/tiangolo/typer-cli/pull/14).
+
 ## 0.0.9
 
 * Upgrade Typer to `0.2.1`. PR [#9](https://github.com/tiangolo/typer-cli/pull/9).
