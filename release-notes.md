@@ -1,5 +1,6 @@
 ## Latest changes
 
+* ⬆️ Update isort requirement from ^4.3.21 to ^5.0.6. PR [#15](https://github.com/tiangolo/typer-cli/pull/15).
 * Update GitHub action issue-manager and add Dependabot. PR [#14](https://github.com/tiangolo/typer-cli/pull/14).
 
 ## 0.0.9
