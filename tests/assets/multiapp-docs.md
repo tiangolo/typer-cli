@@ -64,7 +64,7 @@ $ multiapp sub hello [OPTIONS]
 
 **Options**:
 
-* `--name TEXT`
+* `--name TEXT`: [default: World]
 * `--help`: Show this message and exit.
 
 ## `multiapp top`
