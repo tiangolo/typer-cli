@@ -14,6 +14,14 @@ def hello(name: str = "World"):
 
 
 @sub_app.command()
+def hi(user: str = typer.Argument("User", help="The name of the user to greet")):
+    """
+    Say Hi
+    """
+    typer.echo(f"Hello {user}")
+
+
+@sub_app.command()
 def bye():
     """
     Say bye
