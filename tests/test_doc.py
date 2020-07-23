@@ -77,7 +77,7 @@ def test_doc_no_typer():
         stderr=subprocess.PIPE,
         encoding="utf-8",
     )
-    assert "Not a valid file or Python module" in result.stderr
+    assert "No Typer app found" in result.stderr
 
 
 def test_doc_file_not_existing():

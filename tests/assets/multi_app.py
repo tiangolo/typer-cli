@@ -18,7 +18,6 @@ def hi(user: str = typer.Argument("User", help="The name of the user to greet"))
     """
     Say Hi
     """
-    typer.echo(f"Hello {user}")
 
 
 @sub_app.command()
