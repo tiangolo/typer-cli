@@ -37,6 +37,7 @@ $ multiapp sub [OPTIONS] COMMAND [ARGS]...
 
 * `bye`: Say bye
 * `hello`: Say Hello
+* `hi`: Say Hi
 
 ### `multiapp sub bye`
 
@@ -65,6 +66,24 @@ $ multiapp sub hello [OPTIONS]
 **Options**:
 
 * `--name TEXT`: [default: World]
+* `--help`: Show this message and exit.
+
+### `multiapp sub hi`
+
+Say Hi
+
+**Usage**:
+
+```console
+$ multiapp sub hi [OPTIONS] [USER]
+```
+
+**Arguments**:
+
+* `[USER]`: The name of the user to greet  [default: User]
+
+**Options**:
+
 * `--help`: Show this message and exit.
 
 ## `multiapp top`

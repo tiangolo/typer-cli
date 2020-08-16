@@ -22,6 +22,7 @@ def test_doc():
     docs_path: Path = Path(__file__).parent / "assets/multiapp-docs.md"
     docs = docs_path.read_text()
     assert docs in result.stdout
+    assert "**Arguments**" in result.stdout
 
 
 def test_doc_output(tmp_path: Path):
