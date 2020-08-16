@@ -6,7 +6,7 @@ variable = "Some text"
 
 
 @sub_app.command()
-def hello(name: str = "World"):
+def hello(name: str = "World", age: int = typer.Option(0, help="The age of the user")):
     """
     Say Hello
     """
@@ -14,7 +14,7 @@ def hello(name: str = "World"):
 
 
 @sub_app.command()
-def hi(user: str = typer.Argument("User", help="The name of the user to greet")):
+def hi(user: str = typer.Argument("World", help="The name of the user to greet")):
     """
     Say Hi
     """
