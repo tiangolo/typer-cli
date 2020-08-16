@@ -225,7 +225,6 @@ def get_docs_for_click(
     for param in obj.get_params(ctx):
         rv = param.get_help_record(ctx)
         if rv is not None:
-            # opts.append(rv)
             if param.param_type_name == "argument":
                 args.append(rv)
             elif param.param_type_name == "option":
