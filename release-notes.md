@@ -1,5 +1,7 @@
 ## Latest changes
 
+## 0.0.10
+
 * ⬆️ Update pytest requirement from ^5.4.3 to ^6.0.1. PR [#22](https://github.com/tiangolo/typer-cli/pull/22).
 * Update tests with defaults. PR [#24](https://github.com/tiangolo/typer-cli/pull/24).
 * Add support for *CLI Arguments* with `help`. PR [#20](https://github.com/tiangolo/typer-cli/pull/20) by [@ovezovs](https://github.com/ovezovs).
