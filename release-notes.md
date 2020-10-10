@@ -7,6 +7,7 @@
 * ⬆️ Update black requirement from ^19.10b0 to ^20.8b1. PR [#28](https://github.com/tiangolo/typer-cli/pull/28).
 * ⬆️ Update pytest-xdist requirement from ^1.31.0 to ^2.1.0. PR [#27](https://github.com/tiangolo/typer-cli/pull/27).
 
+
 ## 0.0.10
 
 * ⬆️ Update pytest requirement from ^5.4.3 to ^6.0.1. PR [#22](https://github.com/tiangolo/typer-cli/pull/22).
