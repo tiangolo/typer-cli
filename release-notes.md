@@ -1,6 +1,6 @@
 # Release Notes
 
-## Latest changes
+## Latest Changes
 
 * ⬆️ Update importlib-metadata requirement from ^1.5 to >=1.5,<3.0. PR [#29](https://github.com/tiangolo/typer-cli/pull/29).
 * 👷 Add Latest Changes GitHub Action. PR [#30](https://github.com/tiangolo/typer-cli/pull/30) by [@tiangolo](https://github.com/tiangolo).
