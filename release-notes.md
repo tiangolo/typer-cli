@@ -1,3 +1,5 @@
+# Release Notes
+
 ## Latest changes
 
 * ⬆️ Update black requirement from ^19.10b0 to ^20.8b1. PR [#28](https://github.com/tiangolo/typer-cli/pull/28).
