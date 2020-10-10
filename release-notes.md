@@ -2,6 +2,7 @@
 
 ## Latest changes
 
+* ⬆️ Update importlib-metadata requirement from ^1.5 to >=1.5,<3.0. PR [#29](https://github.com/tiangolo/typer-cli/pull/29).
 * 👷 Add Latest Changes GitHub Action. PR [#30](https://github.com/tiangolo/typer-cli/pull/30) by [@tiangolo](https://github.com/tiangolo).
 * ⬆️ Update black requirement from ^19.10b0 to ^20.8b1. PR [#28](https://github.com/tiangolo/typer-cli/pull/28).
 * ⬆️ Update pytest-xdist requirement from ^1.31.0 to ^2.1.0. PR [#27](https://github.com/tiangolo/typer-cli/pull/27).
