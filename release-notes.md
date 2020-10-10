@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* 🔖 Release version 0.0.11. PR [#31](https://github.com/tiangolo/typer-cli/pull/31) by [@tiangolo](https://github.com/tiangolo).
 
 ## 0.0.11
 
