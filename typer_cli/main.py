@@ -8,8 +8,8 @@ import click
 import click.core
 import typer
 from click import Command, Group, Option
+from click._bashcomplete import get_choices as original_get_choices  # type: ignore
 from click._bashcomplete import resolve_ctx  # type: ignore
-from click._bashcomplete import get_choices as original_get_choices
 
 from . import __version__
 
