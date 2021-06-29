@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "typer-cli"
-version = "0.0.11"
+version = "0"
 description = "Run Typer scripts with completion, without having to create a package, using Typer CLI."
 authors = ["Sebastián Ramírez <tiangolo@gmail.com>"]
 readme = "README.md"
@@ -57,3 +57,9 @@ typer = "typer_cli.main:main"
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.poetry-version-plugin]
+source = "init"
+
+[tool.isort]
+profile = "black"
