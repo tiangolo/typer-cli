@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* ✨ Move CI to GitHub Actions, remove dependency on `importlib-metadata`. PR [#48](https://github.com/tiangolo/typer-cli/pull/48) by [@tiangolo](https://github.com/tiangolo).
 
 ## 0.0.11
 
