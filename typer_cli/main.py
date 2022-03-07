@@ -3,6 +3,7 @@ import re
 import sys
 from pathlib import Path
 from typing import Any, Iterable, List, Optional, Tuple, cast
+import os
 
 import click
 import click.core
@@ -35,7 +36,7 @@ state = State()
 def maybe_update_state(ctx: click.Context) -> None:
     path_or_module = ctx.params.get("path_or_module")
     if path_or_module:
-        file_path = Path(path_or_module)
+        file_path = Path(os.path.expanduser(path_or_module))
         if file_path.exists() and file_path.is_file():
             state.file = file_path
         else:
