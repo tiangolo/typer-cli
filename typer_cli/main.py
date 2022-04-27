@@ -2,14 +2,12 @@ import importlib.util
 import re
 import sys
 from pathlib import Path
-from typing import Any, Iterable, List, Optional, Tuple, cast
+from typing import Any, Iterable, Optional, cast
 
 import click
-import click.core
 import typer
+import typer.core
 from click import Command, Group, Option
-from click._bashcomplete import get_choices as original_get_choices  # type: ignore
-from click._bashcomplete import resolve_ctx  # type: ignore
 
 from . import __version__
 
@@ -53,7 +51,7 @@ def maybe_update_state(ctx: click.Context) -> None:
         state.func = func_name
 
 
-class TyperCLIGroup(click.Group):
+class TyperCLIGroup(typer.core.TyperGroup):
     def list_commands(self, ctx: click.Context) -> Iterable[str]:
         self.maybe_add_run(ctx)
         return super().list_commands(ctx)
@@ -149,18 +147,6 @@ def maybe_add_run_to_cli(cli: click.Group) -> None:
                 if not click_obj.help:
                     click_obj.help = "Run the provided Typer app."
                 cli.add_command(click_obj)
-
-
-def get_choices(
-    cli: Command, prog_name: str, args: List[str], incomplete: str
-) -> List[Tuple[str, str]]:
-    ctx: typer.Context = resolve_ctx(cli, prog_name, args)
-    if ctx.parent is None:
-        assert isinstance(cli, Group)
-        cli = cast(Group, cli)
-        maybe_update_state(ctx)
-        maybe_add_run_to_cli(cli)
-    return original_get_choices(cli, prog_name, args, incomplete)
 
 
 def print_version(ctx: click.Context, param: Option, value: bool) -> None:
@@ -302,5 +288,4 @@ def docs(
 
 
 def main() -> Any:
-    click._bashcomplete.get_choices = get_choices
     return app()
