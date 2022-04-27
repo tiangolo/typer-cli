@@ -4,4 +4,5 @@ __pycache__
 typer_cli.egg-info
 .pytest_cache
 .coverage
+.coverage.*
 poetry.lock
