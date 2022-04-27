@@ -170,7 +170,7 @@ def print_version(ctx: click.Context, param: Option, value: bool) -> None:
     raise typer.Exit()
 
 
-@app.callback(cls=TyperCLIGroup)
+@app.callback(cls=TyperCLIGroup, no_args_is_help=True)
 def callback(
     ctx: typer.Context,
     *,
