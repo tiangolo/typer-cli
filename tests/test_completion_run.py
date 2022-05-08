@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 def test_script_completion_run():
     result = subprocess.run(
         ["coverage", "run", "-m", "typer_cli"],
