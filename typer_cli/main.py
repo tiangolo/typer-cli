@@ -2,7 +2,7 @@ import importlib.util
 import re
 import sys
 from pathlib import Path
-from typing import Any, Iterable, Optional, cast
+from typing import Any, List, Optional, cast
 
 import click
 import typer
@@ -52,7 +52,7 @@ def maybe_update_state(ctx: click.Context) -> None:
 
 
 class TyperCLIGroup(typer.core.TyperGroup):
-    def list_commands(self, ctx: click.Context) -> Iterable[str]:
+    def list_commands(self, ctx: click.Context) -> List[str]:
         self.maybe_add_run(ctx)
         return super().list_commands(ctx)
 
@@ -72,7 +72,7 @@ class TyperCLIGroup(typer.core.TyperGroup):
 def get_typer_from_module(module: Any) -> Optional[typer.Typer]:
     # Try to get defined app
     if state.app:
-        obj: typer.Typer = getattr(module, state.app, None)
+        obj = getattr(module, state.app, None)
         if not isinstance(obj, typer.Typer):
             typer.echo(f"Not a Typer object: --app {state.app}", err=True)
             sys.exit(1)
