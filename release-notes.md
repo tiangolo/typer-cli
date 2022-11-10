@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* ⬆️ Update flake8 requirement from ^3.7.9 to ^4.0.1. PR [#52](https://github.com/tiangolo/typer-cli/pull/52) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Update pytest requirement from ^6.0.1 to ^7.0.1. PR [#62](https://github.com/tiangolo/typer-cli/pull/62) by [@dependabot[bot]](https://github.com/apps/dependabot).
 ## 0.0.12
 
