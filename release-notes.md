@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* ⬆️ Update pytest requirement from ^6.0.1 to ^7.0.1. PR [#62](https://github.com/tiangolo/typer-cli/pull/62) by [@dependabot[bot]](https://github.com/apps/dependabot).
 ## 0.0.12
 
 * ✨ Move CI to GitHub Actions, remove dependency on `importlib-metadata`. This would fix use cases that also depend on `importlib-metadata` and could have conflicts, like installing `mkdocs`, as now `typer-cli` no longer depends on `importlib-metadata`. PR [#48](https://github.com/tiangolo/typer-cli/pull/48) by [@tiangolo](https://github.com/tiangolo).
