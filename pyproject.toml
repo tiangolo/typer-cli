@@ -35,7 +35,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
-typer = ">=0.4.0,<=0.6.1"
+typer = ">=0.4.0,<=0.7.0"
 colorama = "^0.4.3"
 shellingham = "^1.3.2"
 
