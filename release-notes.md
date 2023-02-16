@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* 👷 Migrate CI coverage to Smokeshow and include alls-green. PR [#93](https://github.com/tiangolo/typer-cli/pull/93) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Upgrade GitHub Actions, add funding config. PR [#92](https://github.com/tiangolo/typer-cli/pull/92) by [@tiangolo](https://github.com/tiangolo).
 * 💚 Fix latest-changes GitHub Action, strike two ⚾. PR [#97](https://github.com/tiangolo/typer-cli/pull/97) by [@tiangolo](https://github.com/tiangolo).
 
