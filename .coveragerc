@@ -5,3 +5,4 @@ source =
     tests
 
 parallel = True
+context = '${CONTEXT}'
