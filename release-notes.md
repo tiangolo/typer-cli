@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* 💚 Fix latest-changes GitHub Action, strike two ⚾. PR [#97](https://github.com/tiangolo/typer-cli/pull/97) by [@tiangolo](https://github.com/tiangolo).
 
 ## 0.0.13
 
