@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* ⬆️ Update mypy requirement from ^0.910 to ^1.0. PR [#83](https://github.com/tiangolo/typer-cli/pull/83) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
 
 ## 0.0.13
