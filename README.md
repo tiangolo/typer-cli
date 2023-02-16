@@ -4,12 +4,11 @@
     <em>Run <strong>Typer</strong> scripts with completion, without having to create a package, using <strong>Typer CLI</strong>.</em>
 </p>
 <p align="center">
-<a href="https://travis-ci.com/tiangolo/typer-cli" target="_blank">
-    <img src="https://travis-ci.com/tiangolo/typer-cli.svg?branch=master" alt="Build Status">
+<a href="https://github.com/tiangolo/typer-cli/actions?query=workflow%3ATest+event%3Apush+branch%3Amaster" target="_blank">
+    <img src="https://github.com/tiangolo/typer-cli/workflows/Test/badge.svg?event=push&branch=master" alt="Test">
 </a>
-<a href="https://codecov.io/gh/tiangolo/typer-cli" target="_blank">
-    <img src="https://img.shields.io/codecov/c/github/tiangolo/typer-cli" alt="Coverage">
-</a>
+<a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/tiangolo/typer-cli" target="_blank">
+    <img src="https://coverage-badge.samuelcolvin.workers.dev/tiangolo/typer-cli.svg" alt="Coverage">
 <a href="https://pypi.org/project/typer-cli" target="_blank">
     <img src="https://badge.fury.io/py/typer-cli.svg" alt="Package version">
 </a>
