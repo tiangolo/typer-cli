@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* 👷 Upgrade Dependabot, include GitHub Actions. PR [#86](https://github.com/tiangolo/typer-cli/pull/86) by [@tiangolo](https://github.com/tiangolo).
 * ♻️ Refactor build system to use Hatch instead of Poetry. PR [#85](https://github.com/tiangolo/typer-cli/pull/85) by [@tiangolo](https://github.com/tiangolo).
 * ✨ Refactor to make Typer CLI compatible with (and require) Typer `>=0.4.0` and Click `8.x.x`. PR [#82](https://github.com/tiangolo/typer-cli/pull/82) by [@omBratteng](https://github.com/omBratteng).
 * ⬆️ Update flake8 requirement from ^3.7.9 to ^4.0.1. PR [#52](https://github.com/tiangolo/typer-cli/pull/52) by [@dependabot[bot]](https://github.com/apps/dependabot).
