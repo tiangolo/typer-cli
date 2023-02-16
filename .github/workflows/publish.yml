@@ -11,33 +11,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: "3.7"
-      - name: Get full python version
-        id: full-python-version
-        run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
-      - name: Install poetry
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install "poetry>=1.2.0a1"
-          python -m poetry plugin add poetry-version-plugin
-      - name: Configure poetry
-        run: python -m poetry config virtualenvs.in-project true
-      - name: Set up cache
-        uses: actions/cache@v1
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+      - uses: actions/cache@v3
         id: cache
         with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Ensure cache is healthy
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: python -m poetry run pip --version >/dev/null 2>&1 || rm -rf .venv
-      - name: Install Dependencies
-        run: python -m poetry install
+          path: ${{ env.pythonLocation }}
+          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}-publish
+      - name: Install build dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: pip install build
+      - name: Build distribution
+        run: python -m build
       - name: Publish
+        uses: pypa/gh-action-pypi-publish@v1.6.4
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+      - name: Dump GitHub context
         env:
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-        run: |
-          python -m poetry config pypi-token.pypi $PYPI_TOKEN
-          bash scripts/publish.sh
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
