@@ -2,14 +2,12 @@ import importlib.util
 import re
 import sys
 from pathlib import Path
-from typing import Any, Iterable, List, Optional, Tuple, cast
+from typing import Any, List, Optional, cast
 
 import click
-import click.core
 import typer
+import typer.core
 from click import Command, Group, Option
-from click._bashcomplete import get_choices as original_get_choices  # type: ignore
-from click._bashcomplete import resolve_ctx  # type: ignore
 
 from . import __version__
 
@@ -53,8 +51,8 @@ def maybe_update_state(ctx: click.Context) -> None:
         state.func = func_name
 
 
-class TyperCLIGroup(click.Group):
-    def list_commands(self, ctx: click.Context) -> Iterable[str]:
+class TyperCLIGroup(typer.core.TyperGroup):
+    def list_commands(self, ctx: click.Context) -> List[str]:
         self.maybe_add_run(ctx)
         return super().list_commands(ctx)
 
@@ -74,7 +72,7 @@ class TyperCLIGroup(click.Group):
 def get_typer_from_module(module: Any) -> Optional[typer.Typer]:
     # Try to get defined app
     if state.app:
-        obj: typer.Typer = getattr(module, state.app, None)
+        obj = getattr(module, state.app, None)
         if not isinstance(obj, typer.Typer):
             typer.echo(f"Not a Typer object: --app {state.app}", err=True)
             sys.exit(1)
@@ -151,18 +149,6 @@ def maybe_add_run_to_cli(cli: click.Group) -> None:
                 cli.add_command(click_obj)
 
 
-def get_choices(
-    cli: Command, prog_name: str, args: List[str], incomplete: str
-) -> List[Tuple[str, str]]:
-    ctx: typer.Context = resolve_ctx(cli, prog_name, args)
-    if ctx.parent is None:
-        assert isinstance(cli, Group)
-        cli = cast(Group, cli)
-        maybe_update_state(ctx)
-        maybe_add_run_to_cli(cli)
-    return original_get_choices(cli, prog_name, args, incomplete)
-
-
 def print_version(ctx: click.Context, param: Option, value: bool) -> None:
     if not value or ctx.resilient_parsing:
         return
@@ -170,7 +156,7 @@ def print_version(ctx: click.Context, param: Option, value: bool) -> None:
     raise typer.Exit()
 
 
-@app.callback(cls=TyperCLIGroup)
+@app.callback(cls=TyperCLIGroup, no_args_is_help=True)
 def callback(
     ctx: typer.Context,
     *,
@@ -302,5 +288,4 @@ def docs(
 
 
 def main() -> Any:
-    click._bashcomplete.get_choices = get_choices
     return app()
