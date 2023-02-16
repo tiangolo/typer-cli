@@ -2,11 +2,15 @@
 
 ## Latest Changes
 
+
+## 0.0.13
+
 * 👷 Upgrade Dependabot, include GitHub Actions. PR [#86](https://github.com/tiangolo/typer-cli/pull/86) by [@tiangolo](https://github.com/tiangolo).
 * ♻️ Refactor build system to use Hatch instead of Poetry. PR [#85](https://github.com/tiangolo/typer-cli/pull/85) by [@tiangolo](https://github.com/tiangolo).
 * ✨ Refactor to make Typer CLI compatible with (and require) Typer `>=0.4.0` and Click `8.x.x`. PR [#82](https://github.com/tiangolo/typer-cli/pull/82) by [@omBratteng](https://github.com/omBratteng).
 * ⬆️ Update flake8 requirement from ^3.7.9 to ^4.0.1. PR [#52](https://github.com/tiangolo/typer-cli/pull/52) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Update pytest requirement from ^6.0.1 to ^7.0.1. PR [#62](https://github.com/tiangolo/typer-cli/pull/62) by [@dependabot[bot]](https://github.com/apps/dependabot).
+
 ## 0.0.12
 
 * ✨ Move CI to GitHub Actions, remove dependency on `importlib-metadata`. This would fix use cases that also depend on `importlib-metadata` and could have conflicts, like installing `mkdocs`, as now `typer-cli` no longer depends on `importlib-metadata`. PR [#48](https://github.com/tiangolo/typer-cli/pull/48) by [@tiangolo](https://github.com/tiangolo).
