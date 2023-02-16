@@ -17,7 +17,6 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.7", "3.8", "3.9", "3.10"]
-        click-7: [true, false]
       fail-fast: false
 
     steps:
@@ -53,11 +52,7 @@ jobs:
         run: python -m poetry run pip --version >/dev/null 2>&1 || rm -rf .venv
       - name: Install Dependencies
         run: python -m poetry install
-      - name: Install Click 7
-        if: matrix.click-7
-        run: pip install "click<8.0.0"
       - name: Lint
-        if: ${{ matrix.python-version != '3.6' && matrix.click-7 == false }}
         run: python -m poetry run bash scripts/lint.sh
       - name: Test
         run: python -m poetry run bash scripts/test.sh
