@@ -2,13 +2,7 @@
 
 ## Latest Changes
 
-* 💚 Fix latest-changes release notes GitHub Action. PR [#96](https://github.com/tiangolo/typer-cli/pull/96) by [@tiangolo](https://github.com/tiangolo).
-* 📝 Update badges on README. PR [#94](https://github.com/tiangolo/typer-cli/pull/94) by [@tiangolo](https://github.com/tiangolo).
-* 👷 Tweak latest-changes GitHub Action when running as a workflow dispatch. PR [#98](https://github.com/tiangolo/typer-cli/pull/98) by [@tiangolo](https://github.com/tiangolo).
-* ⬆️ Enable tests and classifiers for Python 3.11. PR [#95](https://github.com/tiangolo/typer-cli/pull/95) by [@tiangolo](https://github.com/tiangolo).
-* 👷 Migrate CI coverage to Smokeshow and include alls-green. PR [#93](https://github.com/tiangolo/typer-cli/pull/93) by [@tiangolo](https://github.com/tiangolo).
-* 👷 Upgrade GitHub Actions, add funding config. PR [#92](https://github.com/tiangolo/typer-cli/pull/92) by [@tiangolo](https://github.com/tiangolo).
-* 💚 Fix latest-changes GitHub Action, strike two ⚾. PR [#97](https://github.com/tiangolo/typer-cli/pull/97) by [@tiangolo](https://github.com/tiangolo).
+
 
 ## 0.0.13
 
@@ -18,6 +12,13 @@
 
 ### Internal
 
+* 💚 Fix latest-changes GitHub Action, strike two ⚾. PR [#97](https://github.com/tiangolo/typer-cli/pull/97) by [@tiangolo](https://github.com/tiangolo).
+* 💚 Fix latest-changes release notes GitHub Action. PR [#96](https://github.com/tiangolo/typer-cli/pull/96) by [@tiangolo](https://github.com/tiangolo).
+* 📝 Update badges on README. PR [#94](https://github.com/tiangolo/typer-cli/pull/94) by [@tiangolo](https://github.com/tiangolo).
+* 👷 Tweak latest-changes GitHub Action when running as a workflow dispatch. PR [#98](https://github.com/tiangolo/typer-cli/pull/98) by [@tiangolo](https://github.com/tiangolo).
+* ⬆️ Enable tests and classifiers for Python 3.11. PR [#95](https://github.com/tiangolo/typer-cli/pull/95) by [@tiangolo](https://github.com/tiangolo).
+* 👷 Migrate CI coverage to Smokeshow and include alls-green. PR [#93](https://github.com/tiangolo/typer-cli/pull/93) by [@tiangolo](https://github.com/tiangolo).
+* 👷 Upgrade GitHub Actions, add funding config. PR [#92](https://github.com/tiangolo/typer-cli/pull/92) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Upgrade Dependabot, include GitHub Actions. PR [#86](https://github.com/tiangolo/typer-cli/pull/86) by [@tiangolo](https://github.com/tiangolo).
 * ♻️ Refactor build system to use Hatch instead of Poetry. PR [#85](https://github.com/tiangolo/typer-cli/pull/85) by [@tiangolo](https://github.com/tiangolo).
 * ⬆️ Update flake8 requirement from ^3.7.9 to ^4.0.1. PR [#52](https://github.com/tiangolo/typer-cli/pull/52) by [@dependabot[bot]](https://github.com/apps/dependabot).
