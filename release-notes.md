@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* 👷 Tweak latest-changes GitHub Action when running as a workflow dispatch. PR [#98](https://github.com/tiangolo/typer-cli/pull/98) by [@tiangolo](https://github.com/tiangolo).
 * ⬆️ Enable tests and classifiers for Python 3.11. PR [#95](https://github.com/tiangolo/typer-cli/pull/95) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Migrate CI coverage to Smokeshow and include alls-green. PR [#93](https://github.com/tiangolo/typer-cli/pull/93) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Upgrade GitHub Actions, add funding config. PR [#92](https://github.com/tiangolo/typer-cli/pull/92) by [@tiangolo](https://github.com/tiangolo).
