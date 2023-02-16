@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* 💚 Fix latest-changes release notes GitHub Action. PR [#96](https://github.com/tiangolo/typer-cli/pull/96) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Update badges on README. PR [#94](https://github.com/tiangolo/typer-cli/pull/94) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Tweak latest-changes GitHub Action when running as a workflow dispatch. PR [#98](https://github.com/tiangolo/typer-cli/pull/98) by [@tiangolo](https://github.com/tiangolo).
 * ⬆️ Enable tests and classifiers for Python 3.11. PR [#95](https://github.com/tiangolo/typer-cli/pull/95) by [@tiangolo](https://github.com/tiangolo).
