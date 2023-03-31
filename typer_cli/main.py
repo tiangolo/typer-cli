@@ -274,7 +274,8 @@ def docs(
     title: str = typer.Option(
         "",
         help="The title for the documentation page. If not provided, the name of "
-             "the program is used."),
+        "the program is used.",
+    ),
 ) -> None:
     """
     Generate Markdown docs for a Typer app.
