@@ -30,7 +30,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled == 'true' }}
         with:
           limit-access-to-actor: true
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          token: ${{ secrets.TYPER_CLI_LATEST_CHANGES }}
           standard_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker://tiangolo/latest-changes:0.0.3
         with:
