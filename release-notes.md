@@ -7,6 +7,9 @@
 * ⬆️ Update pytest-cov requirement from ^2.8.1 to ^4.0.0. PR [#76](https://github.com/tiangolo/typer-cli/pull/76) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆️ Update mypy requirement from ^0.910 to ^1.0. PR [#83](https://github.com/tiangolo/typer-cli/pull/83) by [@dependabot[bot]](https://github.com/apps/dependabot).
 
+### Internal
+
+* 👷 Update latest-changes GitHub Action. PR [#130](https://github.com/tiangolo/typer-cli/pull/130) by [@tiangolo](https://github.com/tiangolo).
 
 ## 0.0.13
 
