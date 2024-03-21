@@ -72,9 +72,9 @@ body:
 
         Write a short description telling me what you are doing, what you expect to happen, and what is currently happening.
       placeholder: |
-        * Open the browser and call the endpoint `/`.
-        * It returns a JSON with `{"message": "Hello World"}`.
-        * But I expected it to return `{"message": "Hello Morty"}`.
+        * Create a script with `argparse` in a file `main.py`.
+        * Run `typer main.py run`.
+        * I expected it to automatically convert `argparse` and run it as a Typer application, but it just runs the main function.
     validations:
       required: true
   - type: dropdown
