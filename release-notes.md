@@ -9,6 +9,7 @@
 
 ### Internal
 
+* 🔧 Add GitHub templates for discussions and issues, and security policy. PR [#133](https://github.com/tiangolo/typer-cli/pull/133) by [@alejsdev](https://github.com/alejsdev).
 * 👷 Update latest-changes GitHub Action. PR [#130](https://github.com/tiangolo/typer-cli/pull/130) by [@tiangolo](https://github.com/tiangolo).
 
 ## 0.0.13
