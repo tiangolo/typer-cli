@@ -6,7 +6,7 @@ Use [Typer](https://github.com/tiangolo/typer) instead of [Typer CLI](https://gi
 
 ---
 
-All the functionality in this repo for [`typer-cli`](https://github.com/tiangolo/typer-cli), has been integrated into [Typer](https://github.com/tiangolo/typer).
+All the functionality in this repo for [`typer-cli`](https://github.com/tiangolo/typer-cli), has been integrated into [Typer](https://github.com/tiangolo/typer) since version 0.12.1.
 
 The main repo, https://github.com/tiangolo/typer, publishes a PyPI package `typer-cli` (that used to be this repo), and that PyPI package does nothing other than depend on `typer`.
 
